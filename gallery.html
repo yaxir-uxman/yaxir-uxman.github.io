@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Gallery | Muhammad Yasir Usman</title>
+<style>
+:root{--ink:#111827;--bg:#f3f5fb}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+nav{position:sticky;top:0;z-index:10;background:#0d1226;display:flex;justify-content:space-between;align-items:center;padding:14px 6vw}
+nav b{color:#fff;font-size:15px}
+nav div a{color:#dbe2f5;text-decoration:none;font-size:12px;font-weight:700;margin-left:20px}
+nav div a:hover{color:#fff}
+nav div a.gl{background:#fff;color:#0d1226;padding:6px 12px;border-radius:20px}
+header{background:radial-gradient(ellipse at 85% 20%,#24336b 0%,#141b3a 45%,#0b1024 100%);color:#fff;padding:50px 6vw 70px;border-bottom:2px solid rgba(245,197,66,.6)}
+.wrap{max-width:1000px;margin:0 auto}
+h1{font-size:34px;margin-bottom:6px}
+header p{color:#cdd5ee;font-size:14px}
+main{max-width:1000px;margin:-30px auto 40px;padding:0 5vw}
+.card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 6px 24px rgba(20,27,58,.08)}
+.gal{columns:3 210px;column-gap:14px}
+.g-item{display:block;width:100%;margin:0 0 14px;padding:0;border:0;background:#e9edf8;cursor:zoom-in;break-inside:avoid;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(20,27,58,.12)}
+.g-item img{display:block;width:100%;height:auto;filter:saturate(.92) brightness(.98);transition:transform .5s,filter .5s}
+.g-item:hover img,.g-item:focus-visible img{transform:scale(1.03);filter:none}
+a:focus-visible,.g-item:focus-visible{outline:3px solid #7aa2ff;outline-offset:2px}
+footer{text-align:center;font-size:12px;color:#4b5563;padding:0 0 30px}
+#lb{position:fixed;inset:0;z-index:50;background:rgba(8,12,30,.94);display:flex;align-items:center;justify-content:center}
+#lb[hidden]{display:none}
+#lb img{max-width:90vw;max-height:84vh;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#lb button{position:absolute;background:none;border:0;color:#fff;font-size:34px;line-height:1;cursor:pointer;padding:12px;opacity:.85}
+#lb button:hover{opacity:1}
+#lb button:focus-visible{outline:2px solid #7aa2ff;border-radius:6px}
+#lb .x{top:10px;right:14px}#lb .p{left:10px}#lb .n{right:10px}
+#lb .cnt{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#cdd5ee;font-size:13px}
+@media(max-width:700px){nav{flex-direction:column;gap:6px;padding:10px 4vw}nav div a{margin:0 8px}h1{font-size:28px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<nav>
+  <b>Muhammad Yasir Usman</b>
+  <div><a href="index.html">Home</a><a class="gl" href="gallery.html">My Gallery</a></div>
+</nav>
+<header><div class="wrap"><h1>My Gallery</h1><p>A few moments from my journey.</p></div></header>
+<main><div class="card"><div class="gal"><button class="g-item" aria-label="Open photo 1"><img src="images/g01.jpg" width="750" height="1000" alt="Muhammad Yasir Usman, photo 1" loading="lazy"></button><button class="g-item" aria-label="Open photo 2"><img src="images/g02.jpg" width="667" height="1000" alt="Muhammad Yasir Usman, photo 2" loading="lazy"></button><button class="g-item" aria-label="Open photo 3"><img src="images/g03.jpg" width="667" height="1000" alt="Muhammad Yasir Usman, photo 3" loading="lazy"></button><button class="g-item" aria-label="Open photo 4"><img src="images/g04.jpg" width="750" height="1000" alt="Muhammad Yasir Usman, photo 4" loading="lazy"></button><button class="g-item" aria-label="Open photo 5"><img src="images/g05.jpg" width="750" height="1000" alt="Muhammad Yasir Usman, photo 5" loading="lazy"></button><button class="g-item" aria-label="Open photo 6"><img src="images/g06.jpg" width="750" height="1000" alt="Muhammad Yasir Usman, photo 6" loading="lazy"></button><button class="g-item" aria-label="Open photo 7"><img src="images/g07.jpg" width="667" height="1000" alt="Muhammad Yasir Usman, photo 7" loading="lazy"></button><button class="g-item" aria-label="Open photo 8"><img src="images/g08.jpg" width="629" height="1000" alt="Muhammad Yasir Usman, photo 8" loading="lazy"></button><button class="g-item" aria-label="Open photo 9"><img src="images/g09.jpg" width="750" height="1000" alt="Muhammad Yasir Usman, photo 9" loading="lazy"></button><button class="g-item" aria-label="Open photo 10"><img src="images/g10.jpg" width="750" height="1000" alt="Muhammad Yasir Usman, photo 10" loading="lazy"></button><button class="g-item" aria-label="Open photo 11"><img src="images/g11.jpg" width="750" height="1000" alt="Muhammad Yasir Usman, photo 11" loading="lazy"></button><button class="g-item" aria-label="Open photo 12"><img src="images/g12.jpg" width="750" height="1000" alt="Muhammad Yasir Usman, photo 12" loading="lazy"></button></div></div></main>
+<footer>&copy; 2026 Muhammad Yasir Usman</footer>
+<div id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer"><button class="x" aria-label="Close">&times;</button><button class="p" aria-label="Previous photo">&#8249;</button><img alt=""><button class="n" aria-label="Next photo">&#8250;</button><div class="cnt"></div></div>
+<script>
+(function(){
+var items=[].slice.call(document.querySelectorAll('.g-item')),lb=document.getElementById('lb'),img=lb.querySelector('img'),cnt=lb.querySelector('.cnt'),i=0,last=null;
+function show(n){i=(n+items.length)%items.length;var t=items[i].querySelector('img');img.src=t.src;img.alt=t.alt;cnt.textContent=(i+1)+' / '+items.length;}
+function open(n){last=document.activeElement;show(n);lb.hidden=false;document.body.style.overflow='hidden';lb.querySelector('.x').focus();}
+function close(){lb.hidden=true;document.body.style.overflow='';if(last)last.focus();}
+items.forEach(function(b,n){b.addEventListener('click',function(){open(n);});});
+lb.querySelector('.x').onclick=close;
+lb.querySelector('.p').onclick=function(){show(i-1);};
+lb.querySelector('.n').onclick=function(){show(i+1);};
+lb.addEventListener('click',function(e){if(e.target===lb)close();});
+document.addEventListener('keydown',function(e){if(lb.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(i-1);if(e.key==='ArrowRight')show(i+1);});
+})();
+</script>
+</body>
+</html>
