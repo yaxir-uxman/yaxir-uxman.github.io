@@ -53,15 +53,98 @@ li{margin-bottom:3px}
 a:focus-visible,.btn:focus-visible{outline:3px solid #7aa2ff;outline-offset:2px}
 footer{text-align:center;font-size:12px;color:var(--muted);padding:0 0 30px}
 @media(max-width:700px){.hero{flex-direction:column;text-align:center}h1{font-size:30px}nav div a{margin-left:10px}}
+
+/* ===== Decor ===== */
+header{position:relative;overflow:hidden;background:radial-gradient(ellipse at 85% 20%,#24336b 0%,#141b3a 45%,#0b1024 100%)}
+header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,#f5c542,transparent);opacity:.6;z-index:2}
+#cH{position:absolute;inset:0;width:100%;height:100%}
+.hero-bg{position:absolute;inset:0;pointer-events:none}
+.hero-bg svg{width:100%;height:100%}
+.arc{fill:none;stroke:rgba(255,255,255,.28);stroke-width:1.5;stroke-dasharray:3 9;stroke-linecap:round;animation:dash 30s linear infinite}
+.arc.g{stroke:rgba(245,197,66,.45);animation-duration:45s}
+@keyframes dash{to{stroke-dashoffset:-600}}
+.glow{position:absolute;border-radius:50%;filter:blur(60px);animation:drift 16s ease-in-out infinite alternate}
+.glow.a{width:360px;height:360px;background:rgba(59,130,246,.35);left:-80px;top:-100px}
+.glow.b{width:300px;height:300px;background:rgba(245,197,66,.16);right:8%;bottom:-140px;animation-delay:-6s}
+@keyframes drift{to{transform:translate(50px,30px) scale(1.15)}}
+.hero{position:relative;z-index:2}
+.pic{box-shadow:0 0 0 8px rgba(255,255,255,.08),0 0 50px rgba(96,140,255,.45)}
+#cB{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.bgfx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bgfx svg{position:absolute;fill:none;stroke:#3b64d8;stroke-width:1.6;opacity:.14;animation:flo 9s ease-in-out infinite alternate}
+.bgfx .f1{left:3%;top:30%;width:90px}
+.bgfx .f2{right:4%;top:22%;width:110px;animation-delay:-3s}
+.bgfx .f3{left:5%;top:72%;width:100px;animation-delay:-5s}
+.bgfx .f4{right:6%;top:62%;width:80px;animation-delay:-2s}
+@keyframes flo{from{transform:translateY(0) rotate(-4deg)}to{transform:translateY(-34px) rotate(6deg)}}
+main,footer{position:relative;z-index:1}
+section{background:rgba(255,255,255,.94);backdrop-filter:blur(6px)}
+@media(max-width:900px){.bgfx{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+
+/* ===== Gallery + wall frames ===== */
+.gal{columns:3 210px;column-gap:14px}
+.g-item{display:block;width:100%;margin:0 0 14px;padding:0;border:0;background:#e9edf8;cursor:zoom-in;break-inside:avoid;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(20,27,58,.12)}
+.g-item img{display:block;width:100%;height:auto;filter:saturate(.9) brightness(.97);transition:transform .5s,filter .5s}
+.g-item:hover img,.g-item:focus-visible img{transform:scale(1.03);filter:none}
+.g-item:focus-visible{outline:3px solid #7aa2ff;outline-offset:2px}
+#lb{position:fixed;inset:0;z-index:50;background:rgba(8,12,30,.94);display:flex;align-items:center;justify-content:center}
+#lb[hidden]{display:none}
+#lb img{max-width:90vw;max-height:84vh;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#lb button{position:absolute;background:none;border:0;color:#fff;font-size:34px;line-height:1;cursor:pointer;padding:12px;opacity:.85}
+#lb button:hover{opacity:1}
+#lb button:focus-visible{outline:2px solid #7aa2ff;border-radius:6px}
+#lb .x{top:10px;right:14px}#lb .p{left:10px}#lb .n{right:10px}
+#lb .cnt{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#cdd5ee;font-size:13px}
+.wall{display:none;position:fixed;top:0;bottom:0;width:calc((100vw - 1000px)/2);align-items:center;justify-content:center;z-index:0;pointer-events:none}
+.wall.l{left:0}.wall.r{right:0}
+.frame{width:min(260px,calc(100% - 60px));aspect-ratio:3/4;background:#fff;padding:9px;border-radius:3px;box-shadow:0 22px 55px rgba(20,27,58,.28);opacity:.55;position:relative;animation:flo 10s ease-in-out infinite alternate}
+.wall.r .frame{animation-delay:-5s}
+.frame::after{content:"";position:absolute;inset:4px;border:1px solid rgba(245,197,66,.75);pointer-events:none}
+.frame .in{position:relative;width:100%;height:100%;overflow:hidden;background:#dfe5f5}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:saturate(.85);animation:fade 18s infinite}
+.frame img:nth-child(2){animation-delay:6s}.frame img:nth-child(3){animation-delay:12s}
+@keyframes fade{0%{opacity:0}6%{opacity:1}33%{opacity:1}39%{opacity:0}100%{opacity:0}}
+@media(min-width:1400px){.wall{display:flex}.bgfx{display:none}}
+@media(max-width:700px){nav{flex-direction:column;gap:6px;padding:10px 4vw}nav div{display:flex;flex-wrap:wrap;justify-content:center}nav div a{margin:0 8px}}
+@media(prefers-reduced-motion:reduce){.frame img:first-child{opacity:1}}
 </style>
 </head>
 <body>
+<canvas id="cB"></canvas>
+<div class="bgfx" aria-hidden="true">
+  <svg class="f1" viewBox="0 0 64 64"><path d="M2 30 L62 4 L44 58 L32 38 Z M32 38 L62 4"/></svg>
+  <svg class="f2" viewBox="0 0 64 64"><path d="M32 12 L2 26 L32 40 L62 26 Z M14 33 V46 C22 54 42 54 50 46 V33 M62 26 V44"/></svg>
+  <svg class="f3" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26"/><ellipse cx="32" cy="32" rx="11" ry="26"/><path d="M6 32 H58 M10 18 H54 M10 46 H54"/></svg>
+  <svg class="f4" viewBox="0 0 64 64"><rect x="12" y="6" width="40" height="52" rx="5"/><circle cx="32" cy="28" r="10"/><path d="M26 28 H38 M32 18 V38 M20 48 H44"/></svg>
+</div>
+<div class="wall l" aria-hidden="true"><div class="frame"><div class="in"><img src="images/g01.jpg" alt="" loading="lazy"><img src="images/g02.jpg" alt="" loading="lazy"><img src="images/g05.jpg" alt="" loading="lazy"></div></div></div>
+<div class="wall r" aria-hidden="true"><div class="frame"><div class="in"><img src="images/g03.jpg" alt="" loading="lazy"><img src="images/g04.jpg" alt="" loading="lazy"><img src="images/g09.jpg" alt="" loading="lazy"></div></div></div>
 <nav>
   <b>Muhammad Yasir Usman</b>
-  <div><a href="#about">About</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#education">Education</a><a href="#contact">Contact</a></div>
+  <div><a href="#about">About</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#education">Education</a><a href="#gallery">My Gallery</a><a href="#contact">Contact</a></div>
 </nav>
 
 <header>
+  <canvas id="cH"></canvas>
+  <div class="hero-bg">
+    <div class="glow a"></div><div class="glow b"></div>
+    <svg viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g stroke="rgba(255,255,255,.14)" fill="none" stroke-width="1.2">
+        <circle cx="1020" cy="200" r="150"/>
+        <ellipse cx="1020" cy="200" rx="150" ry="150"><animate attributeName="rx" values="150;0;150" dur="18s" repeatCount="indefinite"/></ellipse>
+        <ellipse cx="1020" cy="200" rx="100" ry="150"><animate attributeName="rx" values="100;150;0;100" dur="18s" repeatCount="indefinite"/></ellipse>
+        <ellipse cx="1020" cy="200" rx="50" ry="150"><animate attributeName="rx" values="50;130;0;50" dur="18s" repeatCount="indefinite"/></ellipse>
+        <line x1="870" y1="200" x2="1170" y2="200"/>
+        <ellipse cx="1020" cy="140" rx="130" ry="18"/>
+        <ellipse cx="1020" cy="260" rx="130" ry="18"/>
+      </g>
+      <path id="fp1" class="arc" d="M-50 360 C 250 120, 650 40, 1010 190"/>
+      <path id="fp2" class="arc g" d="M150 410 C 480 230, 820 330, 1250 60"/>
+      <g fill="#fff"><path d="M0 0 L-16 -7 L-11 0 L-16 7 Z"><animateMotion dur="16s" repeatCount="indefinite" rotate="auto"><mpath href="#fp1"/></animateMotion></path></g>
+      <g fill="#f5c542"><path d="M0 0 L-14 -6 L-10 0 L-14 6 Z"><animateMotion dur="22s" begin="-8s" repeatCount="indefinite" rotate="auto"><mpath href="#fp2"/></animateMotion></path></g>
+    </svg>
+  </div>
   <div class="hero">
     <div class="pic"><img src="photo.jpg" alt="Muhammad Yasir Usman" onerror="this.remove();this.parentNode.textContent='MY'"></div>
     <div>
@@ -148,6 +231,11 @@ footer{text-align:center;font-size:12px;color:var(--muted);padding:0 0 30px}
   <div class="edu"><h3>SSC Matriculation (Science)</h3><div>Zakariya Public High School Kabirwala | 2011 – 2013</div></div>
 </section>
 
+<section id="gallery">
+  <h2>My Gallery</h2>
+  <div class="gal"><button class="g-item" aria-label="Open photo 1"><img src="images/g01.jpg" width="750" height="1000" alt="Muhammad Yasir Usman, photo 1" loading="lazy"></button><button class="g-item" aria-label="Open photo 2"><img src="images/g02.jpg" width="667" height="1000" alt="Muhammad Yasir Usman, photo 2" loading="lazy"></button><button class="g-item" aria-label="Open photo 3"><img src="images/g03.jpg" width="667" height="1000" alt="Muhammad Yasir Usman, photo 3" loading="lazy"></button><button class="g-item" aria-label="Open photo 4"><img src="images/g04.jpg" width="750" height="1000" alt="Muhammad Yasir Usman, photo 4" loading="lazy"></button><button class="g-item" aria-label="Open photo 5"><img src="images/g05.jpg" width="750" height="1000" alt="Muhammad Yasir Usman, photo 5" loading="lazy"></button><button class="g-item" aria-label="Open photo 6"><img src="images/g06.jpg" width="750" height="1000" alt="Muhammad Yasir Usman, photo 6" loading="lazy"></button><button class="g-item" aria-label="Open photo 7"><img src="images/g07.jpg" width="667" height="1000" alt="Muhammad Yasir Usman, photo 7" loading="lazy"></button><button class="g-item" aria-label="Open photo 8"><img src="images/g08.jpg" width="629" height="1000" alt="Muhammad Yasir Usman, photo 8" loading="lazy"></button><button class="g-item" aria-label="Open photo 9"><img src="images/g09.jpg" width="750" height="1000" alt="Muhammad Yasir Usman, photo 9" loading="lazy"></button><button class="g-item" aria-label="Open photo 10"><img src="images/g10.jpg" width="750" height="1000" alt="Muhammad Yasir Usman, photo 10" loading="lazy"></button><button class="g-item" aria-label="Open photo 11"><img src="images/g11.jpg" width="750" height="1000" alt="Muhammad Yasir Usman, photo 11" loading="lazy"></button><button class="g-item" aria-label="Open photo 12"><img src="images/g12.jpg" width="750" height="1000" alt="Muhammad Yasir Usman, photo 12" loading="lazy"></button></div>
+</section>
+
 <section id="contact">
   <h2>Let's Connect</h2>
   <div class="contact">
@@ -160,5 +248,46 @@ footer{text-align:center;font-size:12px;color:var(--muted);padding:0 0 30px}
 </section>
 </main>
 <footer>&copy; 2026 Muhammad Yasir Usman</footer>
+<script>
+(function(){
+var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function net(c,fixed,dot,line,n){
+  var x=c.getContext('2d'),W,H,P=[];
+  function size(){var r=fixed?{width:innerWidth,height:innerHeight}:c.parentNode.getBoundingClientRect();
+    W=c.width=r.width;H=c.height=r.height;}
+  size();addEventListener('resize',size);
+  for(var i=0;i<n;i++)P.push({x:Math.random()*2000,y:Math.random()*1000,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.8+.8});
+  function draw(){
+    x.clearRect(0,0,W,H);
+    for(var i=0;i<P.length;i++){var a=P[i];
+      if(!reduce){a.x+=a.vx;a.y+=a.vy;}
+      if(a.x<0)a.x=W;if(a.x>W)a.x=0;if(a.y<0)a.y=H;if(a.y>H)a.y=0;
+      x.beginPath();x.arc(a.x,a.y,a.r,0,6.283);x.fillStyle=dot;x.fill();
+      for(var j=i+1;j<P.length;j++){var b=P[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<130){x.strokeStyle=line.replace('A',(1-d/130)*.9);x.lineWidth=.7;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke();}}}
+    if(!reduce)requestAnimationFrame(draw);
+  }
+  draw();
+}
+net(document.getElementById('cH'),false,'rgba(255,255,255,.7)','rgba(150,185,255,A)',55);
+net(document.getElementById('cB'),true,'rgba(59,100,216,.45)','rgba(59,100,216,A)',48);
+if(reduce){document.querySelectorAll('animateMotion').forEach(function(e){e.parentNode.remove();});}
+})();
+</script>
+<div id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer"><button class="x" aria-label="Close">&times;</button><button class="p" aria-label="Previous photo">&#8249;</button><img alt=""><button class="n" aria-label="Next photo">&#8250;</button><div class="cnt"></div></div>
+<script>
+(function(){
+var items=[].slice.call(document.querySelectorAll('.g-item')),lb=document.getElementById('lb'),img=lb.querySelector('img'),cnt=lb.querySelector('.cnt'),i=0,last=null;
+function show(n){i=(n+items.length)%items.length;var t=items[i].querySelector('img');img.src=t.src;img.alt=t.alt;cnt.textContent=(i+1)+' / '+items.length;}
+function open(n){last=document.activeElement;show(n);lb.hidden=false;document.body.style.overflow='hidden';lb.querySelector('.x').focus();}
+function close(){lb.hidden=true;document.body.style.overflow='';if(last)last.focus();}
+items.forEach(function(b,n){b.addEventListener('click',function(){open(n);});});
+lb.querySelector('.x').onclick=close;
+lb.querySelector('.p').onclick=function(){show(i-1);};
+lb.querySelector('.n').onclick=function(){show(i+1);};
+lb.addEventListener('click',function(e){if(e.target===lb)close();});
+document.addEventListener('keydown',function(e){if(lb.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(i-1);if(e.key==='ArrowRight')show(i+1);});
+})();
+</script>
 </body>
 </html>
